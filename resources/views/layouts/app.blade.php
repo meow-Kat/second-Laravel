@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -15,6 +15,8 @@
 
     <!-- Styles  bootstrap的樣式 -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- dataTable css --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     @yield('css')
 </head>
@@ -38,8 +40,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ asset('admin/news') }}">最新消息</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  產品管理
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{{ asset('/admin/product/type') }}">產品種類</a>
+                                  <a class="dropdown-item" href="{{ asset('/admin/product/item') }}">產品品項</a>
+                              </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ asset('admin/product') }}">產品管理</a>
+                                <a class="nav-link" href="{{ asset('admin/user') }}">會員管理</a>
                             </li>
                         {{-- @endcan --}}
                     </ul>
@@ -81,12 +91,19 @@
         </nav>
 
         <main class="py-4">
+            @if (Session::has('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('message') }} {{-- 如果有message 帶message進去 --}}
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
 
     <!-- Scripts        瀏覽其渲染後最後才會進來 ↓ -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     @yield('js')
 </body>
