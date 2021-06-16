@@ -9,21 +9,21 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
+    <!-- Styles  bootstrap的樣式 -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('css')
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <!-- ↓ 管理多語系 -->
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        {{-- 只有是admin才能看到 --}}
+                        {{-- @can('admin') --}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ asset('admin/news') }}">最新消息</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ asset('admin/product') }}">產品管理</a>
+                            </li>
+                        {{-- @endcan --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +84,10 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts        瀏覽其渲染後最後才會進來 ↓ -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @yield('js')
 </body>
 </html>
