@@ -12,7 +12,7 @@ class Product extends Model
     // 關聯資料表寫在 model裡面 除了這個 model 外 ProductType 也要綁
     public function type()
     {   // 一對一 (反向關聯)                 關聯看這裡 ↓
-        return $this->belongsTo(ProductType::class, 'id');  
+        return $this->belongsTo(ProductType::class, 'product_type_id');  
                     // 也可以 'App\ProductType'
     }
 }

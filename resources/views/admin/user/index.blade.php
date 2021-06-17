@@ -27,6 +27,8 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
                                     <th>Role</th>
                                     <th>操作</th>
                                 </tr>
@@ -36,6 +38,9 @@
                                 <tr>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
+                                           {{-- 可以繞過除錯寫法 ↓ --}}
+                                    <td>{{ $item->client->phone??'' }}</td>
+                                    <td>{{ $item->client->address??'' }}</td>
                                     <td>{{ $item->role }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ asset('/admin/user/edit') }}/{{ $item->id }}">編輯</a>

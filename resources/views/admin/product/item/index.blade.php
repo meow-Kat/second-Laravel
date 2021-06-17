@@ -25,20 +25,20 @@
                         <table id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>Product Type</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
                                     <th>Discrip</th>
-                                    <th>Product Type</th>
+                                    <th>Operation</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($list as $item)
                                 <tr>
-                                    {{-- <td>{{ $item->type->type_name }}</td> --}}
+                                    <td>{{ $item->type->type_name }}</td>
                                     <td>{{ $item->product_name }}</td>
                                     <td>{{ $item->product_price }}</td>
                                     <td>{{ $item->product_discript }}</td>
-                                    <td>{{ $item->product_type_id }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ asset('/admin/product/item/edit') }}/{{ $item->id }}">編輯</a>
                                         <form action="{{ asset('/admin/product/item/delete') }}/{{ $item->id }}" method="POST">
@@ -54,10 +54,11 @@
                             <tfoot>
                                 <thead>
                                     <tr>
+                                        <th>Product Type</th>
                                         <th>Product Name</th>
                                         <th>Price</th>
                                         <th>Discrip</th>
-                                        <th>Product Type</th>
+                                        <th>Operation</th>
                                     </tr>
                                 </thead>
                             </tfoot>

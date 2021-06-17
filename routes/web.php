@@ -71,5 +71,11 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function(){
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::post('/user/update/{id}', 'UserController@update');
     Route::delete('/user/delete/{id}', 'UserController@delete');
-
+    // 最新消息
+    Route::get('/news', 'NewsController@news');
+    Route::get('/news/create', 'NewsController@create');
+    Route::get('/news/edit/{id}', 'NewsController@edit');
+    Route::post('/news/store', 'NewsController@store');
+    Route::post('/news/update/{id}', 'NewsController@update');
+    Route::delete('/news/delete/{id}', 'NewsController@delete');
 });

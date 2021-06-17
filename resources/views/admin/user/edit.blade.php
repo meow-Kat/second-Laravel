@@ -26,6 +26,7 @@
                             <div class="form-group row">
                                 <label for="role" class="col-md-4 col-form-label text-md-right">腳色</label>
                                 <div class="col-md-6">
+                                                                                    {{-- ↓ 不隨便動 --}}
                                     <select class="form-control" id="role" name="role">
                                             {{-- ↓ 使用if                         ↓ 預設選擇狀態 --}}
                                         <option @if($record->role == 'admin' ) selected @endif>admin</option>
@@ -60,6 +61,22 @@
                                     @enderror
                                 </div>
                             </div>
+                            {{-- @if ($record->role == 'user') --}}
+                            <div class="form-group row">
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">電話</label>
+                                <div class="col-md-6">                             
+                                    <input id="phone" type="text" class="form-control"  @if ($record->role == 'admin') disabled @endif name="phone" value="{{ $record->client->phone??'' }}" required autocomplete="phone" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="address" class="col-md-4 col-form-label text-md-right">地址</label>
+                                <div class="col-md-6">                            
+                                    <input id="address" type="text" class="form-control"  @if ($record->role == 'admin') disabled @endif name="address" value="{{ $record->client->address??'' }}" required autocomplete="address" autofocus>
+                                </div>
+                            </div>
+                            {{-- @endif --}}
+                            
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
