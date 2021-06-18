@@ -32,7 +32,7 @@
                                         src="https://dummyimage.com/600x400">
                                     <input class="py-3" type="file" onchange="readURL(this)"
                                         targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png"
-                                        name="img">
+                                        name="img" >
                                 </div>
                                 <div class="col-6">
                                     <label for="type">分類 Classify</label>
@@ -48,6 +48,7 @@
                                     {{-- <input type="date" class="form-control" id="publish" name="publish" required> --}}
                                     <label class="py-2" for="title">標題</label>
                                     <input type="title" class="form-control" id="title" name="title" required>
+                                    
                                     <div class="form-group pt-2">
                                         <label for="content">內容</label>
                                         <textarea class="form-control" id="content" rows="3"

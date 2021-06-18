@@ -15,4 +15,9 @@ class Product extends Model
         return $this->belongsTo(ProductType::class, 'product_type_id');  
                     // 也可以 'App\ProductType'
     }
+
+    public function photo()
+    {
+        return $this->hasMany(Product::class, 'product_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductImg;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,12 +20,16 @@ class ProductController extends Controller
     public function product()
     {
         $list = Product::get();
+
+        
+
         return view( $this->index,compact('list'));
     }
     public function edit($id)
     {
+        $type = ProductType::get();
         $record = Product::find($id);
-        return view( $this->edit, compact('record') );
+        return view( $this->edit, compact('record','type' ) );
     }
 
     public function create()
@@ -33,7 +38,21 @@ class ProductController extends Controller
         return view( $this->create ,compact('type'));
     }
     public function store(Request $request)
-    {
+    {   // 剛創的資料
+        $new_recode = Product::create($request->all());
+
+        if ($request->hasFile('photo')) {
+            foreach($request->file('photo') as $item){
+                $path = FileController::imgUpload($item);
+
+                ProductImg::create([
+                    'photo' => $path,
+                    'product_id' => $new_recode->id,
+                ]);
+            }
+        }
+
+
     //  ↓ 驗證  可自己制定驗證規則       ↓ 驗證全部
         $v = Validator::make($request->all(), [
             // '欄位' => ['驗證規則']
@@ -54,7 +73,6 @@ class ProductController extends Controller
         // ]);
         
         // 快速寫法
-        Product::create($request->all());
 
         return redirect('/admin/product/item')->with('message', '新增成功');
     }

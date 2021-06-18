@@ -43,22 +43,8 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        if($request->img){
-            // 嚴謹的寫法取檔案
-            $file = $request->file('img');
-            // 如果上傳檔案資料夾不存在
-            if (!is_dir('upload/')) {
-                // 創一個上傳的資料夾(在public內)
-                mkdir('upload/');
-            }
-            // 會先變成tmp檔但是要取得正確的副檔名
-            $extenstion = $request->img->getClientOriginalExtension();
-            // 新檔名 = 亂數.副檔名
-            $filename = md5(uniqid(rand())) . '.' . $extenstion;
-            $path = '/upload/' . $filename;
-
-                      // 存什麼檔 ↓    ↓ 存到哪裡去(不寫死) ↓ 的資料夾的副檔名
-            move_uploaded_file($file, public_path() . $path);
+        if($request->hasFile('img')){
+            $path = FileController::imgUpload($request->file('img'));
         }
 
         News::create([
@@ -66,8 +52,8 @@ class NewsController extends Controller
             // 會直接取今天日期
             'publish_date' => date('Y-m-d'),
             'title' => $request->title,
-            // img 存路徑
-            'img' => $path,
+            // img 存路徑 這邊可以不用存圖
+            'img' => $path??'',
             'content' => $request->content,
         ]);
         
@@ -78,8 +64,8 @@ class NewsController extends Controller
     {   
         // 刪除舊圖片要先宣告
         $old_record = News::find($id);
-
-        if($request->img){
+        // 判斷裡面有沒有檔案
+        if($request->hasFile('img')){
             // 重新上傳圖片前舊的要先刪除
             // 要刪除路徑名稱(完整路徑名)
             File::delete(public_path(). $old_record->img);
@@ -98,6 +84,7 @@ class NewsController extends Controller
 
                       // 存什麼檔 ↓    ↓ 存到哪裡去(不寫死) ↓ 的資料夾的副檔名
             move_uploaded_file($file, public_path() . $path);
+            $old_record->img = $path;
         }
 
         
@@ -105,7 +92,6 @@ class NewsController extends Controller
         $old_record->publish_date = $request->publish_date;
         $old_record->title = $request->title;
                         // 要是路徑 
-        $old_record->img = $path;
         $old_record->content = $request->content;
         $old_record->save();
 
