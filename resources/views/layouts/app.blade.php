@@ -101,8 +101,8 @@
         </main>
     </div>
 
-    <!-- Scripts        瀏覽其渲染後最後才會進來 ↓ -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts        瀏覽其渲染後最後才會進來 -> defer  -->
+    <script src="{{ asset('js/app.js') }}" ></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     @yield('js')

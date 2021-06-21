@@ -53,6 +53,7 @@
                                 </div>
                             </div>
 
+                            {{-- 讓使用者在編輯資料時刪除關聯圖片 --}}
                             <div class="form-group row">
                                 <label for="photo" class="col-md-4 col-form-label text-md-right">多圖片</label>
                                 <div class="col-md-6">

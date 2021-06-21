@@ -78,4 +78,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function(){
     Route::post('/news/store', 'NewsController@store');
     Route::post('/news/update/{id}', 'NewsController@update');
     Route::delete('/news/delete/{id}', 'NewsController@delete');
+
+    Route::post('/deleteImage', 'FileController@deleteImage');
+    
 });

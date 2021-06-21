@@ -29,6 +29,7 @@
                                     <th>Product Name</th>
                                     <th>Price</th>
                                     <th>Discrip</th>
+                                    <th>Photo</th>
                                     <th>Operation</th>
                                 </tr>
                             </thead>
@@ -40,13 +41,17 @@
                                     <td>{{ $item->product_price }}</td>
                                     <td>{{ $item->product_discript }}</td>
                                     <td>
+                                        @foreach ($photo as $item)
+                                            <img src="{{ asset( $item->photo??'' ) }}" alt="" style="width: 150px;height: 100px;">
+                                        @endforeach
+                                    </td>
+                                    <td>
                                         <a class="btn btn-primary btn-sm" href="{{ asset('/admin/product/item/edit') }}/{{ $item->id }}">編輯</a>
                                         <form action="{{ asset('/admin/product/item/delete') }}/{{ $item->id }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm">Delete</button>
                                         </form>
-
                                     </td>
                                 </tr>
                                 @endforeach
@@ -58,6 +63,7 @@
                                         <th>Product Name</th>
                                         <th>Price</th>
                                         <th>Discrip</th>
+                                        <th>Photo</th>
                                         <th>Operation</th>
                                     </tr>
                                 </thead>

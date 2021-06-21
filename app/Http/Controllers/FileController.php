@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductImg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FileController extends Controller
 {
@@ -24,6 +26,19 @@ class FileController extends Controller
         move_uploaded_file($file, public_path() . $path);
     
         return $path;
+    }
+
+    public function deleteImage(Request $request){
+        // 送出 JS 的刪除來這邊接收
+        // 從id找要刪的資料
+        $old_record = ProductImg::find($request->id);
+        //判斷檔案是否存在
+        if(file_exists(public_path() . $old_record->photo)){
+            // 有就刪
+            File::delete(public_path() . $old_record->photo);
+        }
+        // 刪除
+        $old_record->delete();
     }
 
 }

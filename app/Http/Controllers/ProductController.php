@@ -20,16 +20,18 @@ class ProductController extends Controller
     public function product()
     {
         $list = Product::get();
+        $photo = ProductImg::get();
 
-        
-
-        return view( $this->index,compact('list'));
+        return view( $this->index,compact('list','photo'));
     }
     public function edit($id)
     {
         $type = ProductType::get();
         $record = Product::find($id);
-        return view( $this->edit, compact('record','type' ) );
+        // 多圖編輯
+        $photo = $record->photo ;
+        
+        return view( $this->edit, compact('record','type','photo' ) );
     }
 
     public function create()
