@@ -87,6 +87,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
     Route::get('/contact_us/look/{id}', 'ContactusController@look');
     Route::delete('/contact_us/delete/{id}', 'ContactusController@delete');
 });
-Route::get('/contactus', function (){
-    return view('front.contact_us.index');
-} );
+
+Route::get('/contact_us', 'FrontController@contactus');
+
+Route::post('/contact_us/store', 'FrontController@store');

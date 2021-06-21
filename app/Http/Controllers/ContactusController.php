@@ -14,7 +14,7 @@ class ContactusController extends Controller
         $this->edit = 'admin.contactus.look';
     }
 
-    public function containus()
+    public function contactus()
     {
         $list = Contactus::get();
         return view($this->index, compact('list'));
@@ -31,7 +31,7 @@ class ContactusController extends Controller
         $old_record = Contactus::find($id);
         $old_record->delete();
 
-        return redirect('/admin/contactus')->with('message', '刪除成功!');
+        return redirect('/admin/contact_us')->with('message', '刪除成功!');
     }
 
 }

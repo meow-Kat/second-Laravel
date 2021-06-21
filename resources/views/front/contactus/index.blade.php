@@ -20,8 +20,8 @@
 
                 <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
+                    <form id="contact-form" name="contact-form" action="{{ asset('contact_us/store') }}" method="POST">
+                        @csrf
                         <!--Grid row-->
                         <div class="row">
 
@@ -50,8 +50,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
-                                    <input type="text" id="subject" name="subject" class="form-control">
-                                    <label for="subject" class="">Subject</label>
+                                    <input type="text" id="title" name="title" class="form-control">
+                                    <label for="title" class="">Title</label>
                                 </div>
                             </div>
                         </div>
@@ -64,20 +64,21 @@
                             <div class="col-md-12">
 
                                 <div class="md-form">
-                                    <textarea type="text" id="message" name="message" rows="2"
+                                    <textarea type="text" id="content" name="content" rows="2"
                                         class="form-control md-textarea"></textarea>
-                                    <label for="message">Your message</label>
+                                    <label for="content">Your message</label>
                                 </div>
 
                             </div>
                         </div>
                         <!--Grid row-->
-
+                        
+                        <div class="text-center text-md-left">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
                     </form>
 
-                    <div class="text-center text-md-left">
-                        <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-                    </div>
+
                     <div class="status"></div>
                 </div>
                 <!--Grid column-->

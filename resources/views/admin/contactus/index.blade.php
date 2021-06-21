@@ -35,12 +35,8 @@
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->title }}</td>
                                     <td>
-                                        <img src="{{ asset( $item->img ) }}" alt="" style="width: 300px;height: 200px;">
-                                    </td>
-                                    <td>{{ $item->content }}</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ asset('/admin/news/look') }}/{{ $item->id }}">查看</a>
-                                        <form action="{{ asset('/admin/news/delete') }}/{{ $item->id }}" method="POST">
+                                        <a class="btn btn-primary btn-sm" href="{{ asset('/admin/contact_us/look') }}/{{ $item->id }}">查看</a>
+                                        <form action="{{ asset('/admin/contact_us/delete') }}/{{ $item->id }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm">Delete</button>
