@@ -11,7 +11,7 @@ class ContactusController extends Controller
     public function __construct()
     {   
         $this->index = 'admin.contactus.index';
-        $this->edit = 'admin.contactus.';
+        $this->edit = 'admin.contactus.look';
     }
 
     public function containus()

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '最新消息管理')
+@section('title', '聯絡我們管理')
 
 @section('css')
 
@@ -11,15 +11,14 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ asset('/admin/home') }}">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">最新消息管理</li>
+              <li class="breadcrumb-item active" aria-current="page">聯絡我們管理</li>
             </ol>
           </nav>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"><h2>最新消息管理</h2></div>
+                    <div class="card-header"><h2>聯絡我們管理</h2></div>
                     <div class="card-body">
-                    <a href="{{ asset('/admin/news/create') }}" class="btn btn-success">新增</a>
 
                         <table id="example" class="display" style="width:100%">
                             <thead>
