@@ -42,10 +42,11 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+// 做 middleware 來當限制器 can 放在 view 頁面顯示就好
+// middleware 參考 app/http / middleware
 
-
-// 群組起來   登入狀態 ↓   並   ↓ 設定權限
-Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function(){
+// 群組起來   登入狀態 ↓   並   ↓ 設定權限 這邊再改 把can:拿掉 到 AdminMiddleware
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
     // 設定頁面
     // 前面的 /admin 可以拿掉
     Route::get('/home', 'HomeController@index')->name('home');
@@ -80,5 +81,12 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function(){
     Route::delete('/news/delete/{id}', 'NewsController@delete');
 
     Route::post('/deleteImage', 'FileController@deleteImage');
-    
+
+    // 聯絡我們
+    Route::get('/contact_us', 'ContactusController@contactus');
+    Route::get('/contact_us/look/{id}', 'ContactusController@look');
+    Route::delete('/contact_us/delete/{id}', 'ContactusController@delete');
 });
+Route::get('/contactus', function (){
+    return view('front.contact_us.index');
+} );

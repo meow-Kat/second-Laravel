@@ -9,6 +9,8 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -26,36 +28,13 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- ↓ 管理多語系 -->
-                    {{ config('app.name', 'Laravel') }}
+                    前台頁面
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        {{-- 只有是admin才能看到 --}}
-                        {{-- @can('admin') --}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ asset('admin/news') }}">最新消息</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  產品管理
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{ asset('/admin/product/type') }}">產品種類</a>
-                                  <a class="dropdown-item" href="{{ asset('/admin/product/item') }}">產品品項</a>
-                              </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ asset('admin/user') }}">會員管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ asset('admin/contact_us') }}">聯絡我們</a>
-                            </li>
-                        {{-- @endcan --}}
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -101,6 +80,7 @@
             @endif
 
             @yield('content')
+            @yield('main')
         </main>
     </div>
 

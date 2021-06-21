@@ -44,7 +44,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         if($request->hasFile('img')){
-            $path = FileController::imgUpload($request->file('img'));
+            $path = FileController::imgUpload($request->file('img'),'news');
         }
 
         News::create([

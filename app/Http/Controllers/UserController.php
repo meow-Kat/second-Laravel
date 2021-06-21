@@ -15,9 +15,11 @@ class UserController extends Controller
                 // 建構子 ↓  因為下面的都會重複寫
     public function __construct()
     {   // 全域變數 的格式
+        // $this 是controller本身
         $this->index = 'admin.user.index';
         $this->edit = 'admin.user.edit';
         $this->create = 'admin.user.create';
+        $this->AdminPage = '/admin/user';
     }
 
     public function index()
@@ -71,7 +73,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect('/admin/user')->with('message', '驗證成功');
+        return redirect($this->AdminPage)->with('message', '驗證成功');
     }
 
     public function update(Request $request, $id)
@@ -111,7 +113,7 @@ class UserController extends Controller
          
         $old_record->delete();
 
-        return redirect('/admin/user')->with('message', '刪除成功!');
+        return redirect($this->AdminPage)->with('message', '刪除成功!');
     }
 
 
