@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $type = ProductType::get();
-        $record = Product::find($id);
+        $record = Product::with('photo')->find($id);
         // 多圖編輯
         $photo = $record->photo ;
         
@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         $requestData = $request->all();
         if ($request->hasFile('pic')) {                                             // ↓ 多層的資料夾
-            $requestData['pic'] = FileController::imgUpload($request->file('photo'),'product');
+            $requestData['pic'] = FileController::imgUpload($request->file('pic'),'product');
         }
 
         $new_recode = Product::create($requestData);

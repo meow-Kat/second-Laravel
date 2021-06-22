@@ -47,6 +47,8 @@ class FileController extends Controller
         }
         // 刪除
         $old_record->delete();
+        
+        return 'success';
     }
 
 }

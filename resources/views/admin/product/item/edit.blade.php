@@ -65,10 +65,30 @@
                             </div>
 
                             {{-- 圖片 --}}
+
                             <div class="form-group row">
-                                <label for="photo" class="col-md-4 col-form-label text-md-right">有的圖</label>
+                                <label for="pic" class="col-md-4 col-form-label text-md-right">封面圖片</label>
+                                    <div class="col-md-3">
+                                       <img class="w-100" src="{{ $record->pic }}" alt="">
+                                    </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="pic" class="col-md-4 col-form-label text-md-right">修改封面圖片</label>
+                                <div class="col-md-6">
+                                    <input class="py-3" type="file" id="pic" accept="image/gif, image/jpeg, image/png"
+                                        name="pic">
+                                </div>
+                            </div>
+                            
+                            <hr>
+
+
+                            <div class="form-group row">
+                                <label for="photo" class="col-md-4 col-form-label text-md-right">其他圖片</label>
                                 {{-- 上傳的部分 --}}
-                                @foreach ($photo as $item)
+                                {{-- 用關聯拿 --}}
+                                @foreach ($record->photo as $item)
                                     <div class="col-md-3">
                                         {{-- 點到圖片刪除按鈕時 將圖片 id 記下來 傳到後端 --}}
                                         {{--  後端根據該筆 id 找到並刪除 --}}
@@ -114,8 +134,9 @@
             e.onclick = function (){
                 let yes = confirm('確定刪除嗎?')
                 if(yes){
-                    // let id = e.setAttribute('','data-id')
-                    let id = $(e).attr('data-id')
+                    // 拿到id
+                    let id = e.getAttribute('data-id')
+                    // let id = $(e).attr('data-id')
                     
                     // 發送非同步的資料到後端
                     let formdata = new FormData()
@@ -130,11 +151,15 @@
                     fetch('/admin/deleteImage', { // 走route
                         'method': 'post',
                         'body': formdata
-                    }).then(function (response) { // 回應
-
+                    }).then(function (response) { // 會街道所以後端傳來的資訊包刮header cookies
+                        // 用字串方式讀出來
+                        return response.text()
+                        // 這邊的 result = succses 來自FileCollorer
                     }).then(function (result) { // 結果 這邊只有前端有被刪除而已後端也要砍
-                        alert('刪除成功')
-                        parent_element.remove()
+                        if (result == 'success') {
+                            alert('刪除成功')
+                            parent_element.remove()
+                        }
                     })
                 }
             }
