@@ -16,7 +16,7 @@ class FileController extends Controller
             // 創一個上傳的資料夾(在public內)
             mkdir('upload/');
         }
-
+                 // 多層資料夾 ↓
         if (!is_dir('upload/'.$dir.'/')) {
             //         再多一層 ↓
             mkdir('upload/'.$dir.'/');

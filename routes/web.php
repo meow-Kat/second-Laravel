@@ -46,48 +46,62 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 // middleware 參考 app/http / middleware
 
 // 群組起來   登入狀態 ↓   並   ↓ 設定權限 這邊再改 把can:拿掉 到 AdminMiddleware
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function(){
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // 設定頁面
     // 前面的 /admin 可以拿掉
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/news', 'NewsController@news');
-    // 產品品項
-    Route::get('/product/item', 'ProductController@product');
-    Route::get('/product/item/create', 'ProductController@create');
-    Route::get('/product/item/edit/{id}', 'ProductController@edit');
-    Route::post('/product/item/store', 'ProductController@store');
-    Route::post('/product/item/update/{id}', 'ProductController@update');
-    Route::delete('/product/item/delete/{id}', 'ProductController@delete');
-    // 產品種類
-    Route::get('/product/type', 'ProductTypeController@type');
-    Route::get('/product/type/create', 'ProductTypeController@create');
-    Route::get('/product/type/edit/{id}', 'ProductTypeController@edit');
-    Route::post('/product/type/store', 'ProductTypeController@store');
-    Route::post('/product/type/update/{id}', 'ProductTypeController@update');
-    Route::delete('/product/type/delete/{id}', 'ProductTypeController@delete');
+    // 產品
+    Route::prefix('product')->group(function () {
+        // 產品品項
+        Route::prefix('item')->group(function () {
+            Route::get('/', 'ProductController@product');
+            Route::get('/create', 'ProductController@create');
+            Route::get('/edit/{id}', 'ProductController@edit');
+            Route::post('/store', 'ProductController@store');
+            Route::post('/update/{id}', 'ProductController@update');
+            Route::delete('/delete/{id}', 'ProductController@delete');
+        });
+        // 產品種類
+        Route::prefix('type')->group(function () {
+            Route::get('/', 'ProductTypeController@type');
+            Route::get('/create', 'ProductTypeController@create');
+            Route::get('/edit/{id}', 'ProductTypeController@edit');
+            Route::post('/store', 'ProductTypeController@store');
+            Route::post('/update/{id}', 'ProductTypeController@update');
+            Route::delete('/delete/{id}', 'ProductTypeController@delete');
+        });
+    });
     // 會員管理
-    Route::get('/user', 'UserController@index');
-    Route::get('/user/create', 'UserController@create');
-    Route::post('/user/store', 'UserController@store');
-    Route::get('/user/edit/{id}', 'UserController@edit');
-    Route::post('/user/update/{id}', 'UserController@update');
-    Route::delete('/user/delete/{id}', 'UserController@delete');
+    Route::prefix('user')->group(function () {
+        Route::get('/', 'UserController@index');
+        Route::get('/create', 'UserController@create');
+        Route::post('/store', 'UserController@store');
+        Route::get('/edit/{id}', 'UserController@edit');
+        Route::post('/update/{id}', 'UserController@update');
+        Route::delete('/delete/{id}', 'UserController@delete');
+    });
     // 最新消息
-    Route::get('/news', 'NewsController@news');
-    Route::get('/news/create', 'NewsController@create');
-    Route::get('/news/edit/{id}', 'NewsController@edit');
-    Route::post('/news/store', 'NewsController@store');
-    Route::post('/news/update/{id}', 'NewsController@update');
-    Route::delete('/news/delete/{id}', 'NewsController@delete');
+    Route::prefix('news')->group(function () {
+        Route::get('/', 'NewsController@news');
+        Route::get('/create', 'NewsController@create');
+        Route::get('/edit/{id}', 'NewsController@edit');
+        Route::post('/store', 'NewsController@store');
+        Route::post('/update/{id}', 'NewsController@update');
+        Route::delete('/delete/{id}', 'NewsController@delete');
+    });
 
     Route::post('/deleteImage', 'FileController@deleteImage');
 
     // 聯絡我們
-    Route::get('/contact_us', 'ContactusController@contactus');
-    Route::get('/contact_us/look/{id}', 'ContactusController@look');
-    Route::delete('/contact_us/delete/{id}', 'ContactusController@delete');
+    Route::prefix('contact_us')->group(function () {
+        Route::get('/', 'ContactusController@contactus');
+        Route::get('/look/{id}', 'ContactusController@look');
+        Route::delete('/delete/{id}', 'ContactusController@delete');
+    });
 });
 
-Route::get('/contact_us', 'FrontController@contactus');
-
-Route::post('/contact_us/store', 'FrontController@store');
+Route::prefix('contact_us')->group(function () {
+    Route::get('/', 'FrontController@contactus');
+    Route::post('/store', 'FrontController@store');
+});

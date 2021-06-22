@@ -26,6 +26,7 @@
                                     <th>姓名</th>
                                     <th>Email</th>
                                     <th>主旨</th>
+                                    <th width="120">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +53,7 @@
                                         <th>姓名</th>
                                         <th>Email</th>
                                         <th>主旨</th>
+                                        <th width="120">操作</th>
                                     </tr>
                                 </thead>
                             </tfoot>

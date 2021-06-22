@@ -20,7 +20,7 @@
 
                 <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="{{ asset('contact_us/store') }}" method="POST">
+                    <form action="{{ asset('/contact_us/store') }}" method="POST">
                         @csrf
                         <!--Grid row-->
                         <div class="row">
@@ -78,8 +78,6 @@
                         </div>
                     </form>
 
-
-                    <div class="status"></div>
                 </div>
                 <!--Grid column-->
 
