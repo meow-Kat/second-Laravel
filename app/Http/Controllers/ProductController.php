@@ -18,8 +18,9 @@ class ProductController extends Controller
         $this->create = 'admin.product.item.create';
     }
     public function product()
-    {
-        $list = Product::get();
+    {   // 可省略 with
+        $list = Product::with('type')->get();
+
         $photo = ProductImg::get();
 
         return view( $this->index,compact('list','photo'));

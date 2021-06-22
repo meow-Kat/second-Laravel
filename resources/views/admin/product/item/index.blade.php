@@ -41,9 +41,9 @@
                                     <td>{{ $item->product_price }}</td>
                                     <td>{{ $item->product_discript }}</td>
                                     <td>
-                                        @foreach ($photo as $item)
-                                            <img src="{{ asset( $item->photo??'' ) }}" alt="" style="width: 150px;height: 100px;">
-                                        @endforeach
+                                        {{-- @foreach ($photo as $item) --}}
+                                            {{-- <img src="{{ asset( $item->photo??'' ) }}" alt="" style="width: 150px;height: 100px;"> --}}
+                                        {{-- @endforeach --}}
                                     </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ asset('/admin/product/item/edit') }}/{{ $item->id }}">編輯</a>

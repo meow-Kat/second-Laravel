@@ -16,8 +16,12 @@ class ProductTypeController extends Controller
         $this->create = 'admin.product.type.create';
     }
     public function type()
-    {
-        $list = ProductType::get();
+    {   // 要同時把建好的關聯拿出來用 ↓ 在model內(使用with) 也可以不寫 系統會自己判斷
+        $list = ProductType::with('products')->get();
+        // 拿到關聯的資料表 ↓
+        // dd($list[0]->products);
+
+
         return view($this->index,compact('list'));
     }
     public function edit($id)
@@ -72,14 +76,15 @@ class ProductTypeController extends Controller
     public function delete(Request $request, $id)
     {
         $old_record = ProductType::find($id);
-        
+        $count = $old_record->product_name->count();
+
         // 不該讓使用者在有種類的情況下刪除種類
         // 如果裡面有東西↓
-        if ($old_record->product_name->count() != 0) {
+        if ($count != 0) {
             //一對多刪除
             return redirect('/admin/product/type')->with('message', 
             '無法刪除，裡面還有'. $old_record->product->count() .'筆資料，請先刪除產品品項');
-        }elseif($old_record->product_name->count() == 0){
+        }elseif($count == 0){
             $old_record->delete();
             return redirect('/admin/product/type')->with('message', '刪除成功!');
         }
