@@ -42,11 +42,17 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {   // 剛創的資料
-        $new_recode = Product::create($request->all());
+
+        $requestData = $request->all();
+        if ($request->hasFile('pic')) {                                             // ↓ 多層的資料夾
+            $requestData['pic'] = FileController::imgUpload($request->file('photo'),'product');
+        }
+
+        $new_recode = Product::create($requestData);
 
         if ($request->hasFile('photo')) {
-            foreach($request->file('photo') as $item){
-                $path = FileController::imgUpload($item);
+            foreach($request->file('photo') as $item){  // ↓ 多層的資料夾
+                $path = FileController::imgUpload($item,'product');
 
                 ProductImg::create([
                     'photo' => $path,

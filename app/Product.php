@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     //
-    protected $fillable = ['product_name', 'product_price', 'product_discript', 'product_type_id'];
+    protected $fillable = ['product_name', 'product_price', 'product_discript', 'product_type_id', 'pic'];
 
     // // 關聯資料表寫在 model裡面 除了這個 model 外 ProductType 也要綁
     // public function type()
