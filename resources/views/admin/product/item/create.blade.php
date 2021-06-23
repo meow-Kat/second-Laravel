@@ -25,10 +25,10 @@
                     <div class="card-body">                                                {{--  ↓ 圖片要注意 --}}
                         <form method="POST" action="{{ asset('admin/product/item/store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="product_type_id row">
+                            <div class="row">
                                 <label for="product_type_id" class="col-md-4 col-form-label text-md-right">分類</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" id="role" name="product_type_id">
+                                    <select class="form-control" id="product_type_id" name="product_type_id">
                                         @foreach ($type as $item)
                                             <option value="{{ $item->id }}">{{ $item->type_name }}</option>
                                         @endforeach
