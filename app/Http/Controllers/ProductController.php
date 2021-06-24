@@ -92,6 +92,9 @@ class ProductController extends Controller
         $record = Product::with('photo')->find($id);
         $requestData =  $request->all();
         // 單張圖片編輯
+        if ($record->pic!='https://placeholder.pics/svg/500x500') {
+            File::delete(public_path().$record->pic);
+        }
         if ($request->hasFile('pic')) {
             File::delete(public_path().$record->pic);
             $path = FileController::imgUpload($request->file('pic'),'product');
@@ -121,7 +124,9 @@ class ProductController extends Controller
     {
         $record = Product::with('photo')->find($id);
         // 刪除主要圖片
-        File::delete(public_path().$record->pic);
+        // if ($record->pic!='https://placeholder.pics/svg/500x500') {
+            File::delete(public_path().$record->pic);
+        // }
         // 刪除其他圖片
         foreach($record->photo as $photo){
             // 刪除其他圖片檔
