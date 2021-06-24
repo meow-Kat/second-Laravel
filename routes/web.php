@@ -105,3 +105,6 @@ Route::prefix('contact_us')->group(function () {
     Route::get('/', 'FrontController@contactus');
     Route::post('/store', 'FrontController@store');
 });
+
+Route::get('/product','FrontController@product');
+

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\Contactus;
+use App\ProductType;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -26,5 +28,12 @@ class FrontController extends Controller
         Contactus::create($request->all());
 
         return redirect('/contact_us')->with('message','發送成功!');
+    }
+
+    public function product()
+    {   
+        $types = ProductType::get();
+        $record = Product::with('photo')->get();
+        return view('front.product.index',compact('record','types'));
     }
 }

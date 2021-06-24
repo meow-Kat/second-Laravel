@@ -6,6 +6,7 @@ use App\Product;
 use App\ProductImg;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -87,28 +88,48 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $v = Validator::make($request->all(), [
-            // '欄位' => ['驗證規則']
-            'product_name' => ['required', 'string', 'max:10'],
-        ]);
+    {   
+        $record = Product::with('photo')->find($id);
+        $requestData =  $request->all();
+        // 單張圖片編輯
+        if ($request->hasFile('pic')) {
+            File::delete(public_path().$record->pic);
+            $path = FileController::imgUpload($request->file('pic'),'product');
+            $requestData['pic'] = $path;
+        }
+        $record->update($requestData);
 
-        if($v->fails()){
-            return redirect()->back()->withErrors($v->errors());
+        // 多張圖片編輯
+        if ($request->hasFile('photo')){
+            foreach($request->file('photo') as $file){
+                $path = FileController::imgUpload($file,'product');
+                ProductImg::create([
+                    'product_id' => $record->id,
+                    'photo' => $path
+                ]);
+            }
         }
 
-        $old_record = Product::find($id);
-        $old_record->product_name = $request->product_name;
-        $old_record->save();
+        // $old_record = Product::find($id);
+        // $old_record->product_name = $request->product_name;
+        // $old_record->save();
 
         return redirect('/admin/product/item')->with('message', '更新成功!');
     }
 
     public function delete(Request $request, $id)
     {
-        $old_record = Product::find($id);
-        $old_record->delete();
-
+        $record = Product::with('photo')->find($id);
+        // 刪除主要圖片
+        File::delete(public_path().$record->pic);
+        // 刪除其他圖片
+        foreach($record->photo as $photo){
+            // 刪除其他圖片檔
+            File::delete(public_path().$photo->photo);
+            // 刪除資料
+            $photo->delete();
+        }
+        $record->delete();
         return redirect('/admin/product/item')->with('message', '刪除成功!');
     }
 }

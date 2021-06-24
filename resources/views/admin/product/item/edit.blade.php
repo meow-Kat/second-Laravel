@@ -43,7 +43,7 @@
                                         <select class="form-control" id="role" name="product_type_id">
                                             @foreach ($type as $item)
                                                             {{-- ↓ 重要 要抓到之前的id --}}
-                                                <option @if( $item->id == $record->type->id)  @endif value="{{ $item->id }}">{{ $item->type_name }}</option>
+                                                <option @if( $item->id == $record->type->id) selected @endif value="{{ $item->id }}">{{ $item->type_name }}</option>
                                             @endforeach
                                         </select>
                                     </select>
@@ -100,7 +100,7 @@
 
                             {{-- 讓使用者在編輯資料時刪除關聯圖片 --}}
                             <div class="form-group row">
-                                <label for="photo" class="col-md-4 col-form-label text-md-right">多圖片</label>
+                                <label for="photo" class="col-md-4 col-form-label text-md-right">其他圖片</label>
                                 <div class="col-md-6">
                                     <input class="py-3" type="file" id="photo" accept="image/gif, image/jpeg, image/png"
                                         name="photo[]" multiple>
