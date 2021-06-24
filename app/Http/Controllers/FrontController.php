@@ -30,10 +30,14 @@ class FrontController extends Controller
         return redirect('/contact_us')->with('message','發送成功!');
     }
 
-    public function product()
+    public function product(Request $request)
     {   
         $types = ProductType::get();
-        $record = Product::with('photo')->get();
+        if($request->type_id){
+            $record = Product::where('product_type_id',$request->type_id)->get();
+        }else{
+            $record = Product::get();
+        }
         return view('front.product.index',compact('record','types'));
     }
 }

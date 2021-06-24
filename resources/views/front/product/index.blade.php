@@ -9,9 +9,10 @@
 @section('main')
     <div class="container">
         <div class="row my-3">
-            <a href="" class="btn btn-primary mr-2">All</a>
+            <a href="/product" class="btn btn-primary mr-2">All</a>
             @foreach ($types as $type)
-                <a href="" class="btn btn-primary mr-2">{{ $type->type_name }}</a>
+             {{-- 打?後面就可以傳參數 --}}
+                <a href="/product?type_id={{ $type->id }}" class="btn btn-primary mr-2">{{ $type->type_name }}</a>
             @endforeach
         </div>
     </div>
