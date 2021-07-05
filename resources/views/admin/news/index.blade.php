@@ -40,7 +40,7 @@
                                     <td>
                                         <img src="{{ asset( $item->img ) }}" alt="" style="width: 300px;height: 200px;">
                                     </td>
-                                    <td>{{ $item->content }}</td>
+                                    <td>{!! $item->content !!}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ asset('/admin/news/edit') }}/{{ $item->id }}">編輯</a>
                                         <form action="{{ asset('/admin/news/delete') }}/{{ $item->id }}" method="POST">
