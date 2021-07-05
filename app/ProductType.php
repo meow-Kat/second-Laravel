@@ -19,7 +19,7 @@ class ProductType extends Model
 
     // 寫關聯的畫兩邊都要寫 因為系統會認為是獨立事件
     public function products()
-    {                       // 要關聯的Medole   有關連的欄位     被關聯的欄位(唯一) // 只要對的上484 FK都無所謂
+    {                       // 要關聯的Medole   對方的欄位     自己的欄位(唯一) // 只要對的上484 FK都無所謂
         return $this->hasMany('App\product','product_type_id', 'id'); // 如果欄位名稱有符合規則後面兩個可以不用給
     }           // 固定寫法 反斜線 ↑ 也可以整串變這樣 Product::class 
     
